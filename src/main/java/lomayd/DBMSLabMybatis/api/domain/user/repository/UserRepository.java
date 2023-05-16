@@ -1,14 +1,21 @@
 package lomayd.DBMSLabMybatis.api.domain.user.repository;
 
+import org.apache.ibatis.annotations.*;
+
 import lomayd.DBMSLabMybatis.api.domain.user.User;
-import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface UserRepository {
 
+    @Insert("INSERT User(id, password, name, nickname, email, age) VALUES (#{id}, #{password}, #{name}, #{nickname}, #{email}, #{age})")
     void save(User user);
 
+    @Select("SELECT * FROM User WHERE id=#{id}")
     User findById(String id);
 
+    @Delete("DELETE FROM User WHERE id=#{id}")
     void deleteById(String id);
+    
+    @Update("UPDATE User SET password=#{user.password},name=#{user.name},nickname=#{user.nickname},email=#{user.email},age=#{user.age} WHERE id=#{id}")
+    void update(String id, User user);
 }

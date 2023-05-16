@@ -5,6 +5,8 @@ services:
     image: mysql:latest
     ports:
       - "3306:3306"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       MYSQL_DATABASE: LAB
       MYSQL_ROOT_USERNAME: root

@@ -42,7 +42,7 @@ public class UserService {
         user.setEmail(userModify.getEmail());
         user.setAge(userModify.getAge());
 
-        userRepository.save(user);
+        userRepository.update(id, user);
     }
     public void removeUser(String id) {
         userRepository.deleteById(id);
