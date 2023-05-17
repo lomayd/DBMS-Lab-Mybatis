@@ -4,3 +4,7 @@ spring:
     username: root
     password:
     driver-class-name: com.mysql.cj.jdbc.Driver
+  mybatis:
+    mapper-locations: /**/*.xml
+    configuration:
+      map-underscore-to-camel-case:true

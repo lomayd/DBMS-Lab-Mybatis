@@ -14,6 +14,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    // SQL Annotation Version
+    
     public void joinUser(UserRequestDto.UserJoin userJoin){
         User user = User.builder()
                 .id(userJoin.getId())
@@ -46,5 +48,41 @@ public class UserService {
     }
     public void removeUser(String id) {
         userRepository.deleteById(id);
+    }
+    
+    // XML Mapper Version
+    
+    public void joinUserXml(UserRequestDto.UserJoin userJoin){
+        User user = User.builder()
+                .id(userJoin.getId())
+                .password(userJoin.getPassword())
+                .name(userJoin.getName())
+                .nickname(userJoin.getNickname())
+                .email(userJoin.getEmail())
+                .age(userJoin.getAge())
+                .build();
+
+        userRepository.saveXml(user);
+    }
+
+    public UserResponseDto.UserInfo getUserXml(String id) {
+        User user = userRepository.findByIdXml(id);
+
+        return UserResponseDto.UserInfo.of(user);
+    }
+
+    public void modifyUserXml(String id, UserRequestDto.UserModify userModify) {
+        User user = userRepository.findByIdXml(id);
+
+        user.setPassword(userModify.getPassword());
+        user.setName(userModify.getName());
+        user.setNickname(userModify.getNickname());
+        user.setEmail(userModify.getEmail());
+        user.setAge(userModify.getAge());
+
+        userRepository.updateXml(id, user);
+    }
+    public void removeUserXml(String id) {
+        userRepository.deleteByIdXml(id);
     }
 }

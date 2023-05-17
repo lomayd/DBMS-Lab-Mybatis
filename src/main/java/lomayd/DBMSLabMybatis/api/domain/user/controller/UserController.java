@@ -14,6 +14,8 @@ public class UserController {
 
     private final UserService userService;
 
+    // SQL Annotation Version
+    
     @PostMapping
     public ResponseEntity<Void> joinUser(@RequestBody UserRequestDto.UserJoin userJoin) {
         userService.joinUser(userJoin);
@@ -34,6 +36,31 @@ public class UserController {
     @DeleteMapping
     public ResponseEntity<Void> removeUser(@RequestParam String id) {
         userService.removeUser(id);
+        return ResponseEntity.ok().build();
+    }
+    
+    // XML Mapper Version
+    
+    @PostMapping("/xml")
+    public ResponseEntity<Void> joinUserXml(@RequestBody UserRequestDto.UserJoin userJoin) {
+        userService.joinUserXml(userJoin);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/xml")
+    public ResponseEntity<UserResponseDto.UserInfo> getUserXml(@RequestParam String id) {
+        return ResponseEntity.ok(userService.getUserXml(id));
+    }
+
+    @PatchMapping("/xml")
+    public ResponseEntity<Void> modifyUserXml(@RequestParam String id, @RequestBody UserRequestDto.UserModify userModify) {
+        userService.modifyUserXml(id, userModify);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/xml")
+    public ResponseEntity<Void> removeUserXml(@RequestParam String id) {
+        userService.removeUserXml(id);
         return ResponseEntity.ok().build();
     }
 }

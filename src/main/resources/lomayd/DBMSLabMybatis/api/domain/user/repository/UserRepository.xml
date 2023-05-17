@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="lomayd.DBMSLabMybatis.api.domain.user.repository.UserRepository">
+    <insert id="saveXml" parameterType="lomayd.DBMSLabMybatis.api.domain.user.User">
+        INSERT User(id, password, name, nickname, email, age) VALUES (#{id}, #{password}, #{name}, #{nickname}, #{email}, #{age})
+    </insert>
+    <select id="findByIdXml" resultType="lomayd.DBMSLabMybatis.api.domain.user.User">
+        SELECT * FROM User WHERE id=#{id}
+    </select>
+    <delete id="deleteByIdXml">
+        DELETE FROM User WHERE id=#{id}
+    </delete>
+    <update id="updateXml" parameterType="lomayd.DBMSLabMybatis.api.domain.user.User">
+        UPDATE User SET password=#{user.password},name=#{user.name},nickname=#{user.nickname},email=#{user.email},age=#{user.age} WHERE id=#{id} 
+    </update>
+</mapper>
